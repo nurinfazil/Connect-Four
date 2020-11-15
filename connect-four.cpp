@@ -180,6 +180,86 @@ public:
             return false;
         }
 
+        // check forward-slash (/) diagonals
+
+        // From [3][0]
+        char check7 = forwardSlashDiagonalCheckerMinRow(3, 0);
+        if (check7 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check7 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [4][0]
+        char check8 = forwardSlashDiagonalCheckerMinRow(4, 0);
+        if (check8 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check8 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [5][0]
+        char check9 = forwardSlashDiagonalCheckerMinRow(5, 0);
+        if (check9 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check9 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [5][1]
+        char check10 = forwardSlashDiagonalCheckerMaxRow(5, 1);
+        if (check10 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check10 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [5][2]
+        char check11 = forwardSlashDiagonalCheckerMaxRow(5, 2);
+        if (check11 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check11 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [5][3]
+        char check12 = forwardSlashDiagonalCheckerMaxRow(5, 3);
+        if (check12 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check12 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
         return true;
     }
 
@@ -226,6 +306,54 @@ public:
             }
 
             currRow++;
+            currCol++;
+        }
+        return '-';
+    }
+
+    char forwardSlashDiagonalCheckerMinRow(int currRow, int currCol)
+    {
+        while ((currRow - 3) >= 0)
+        {
+
+            if ((board[currRow][currCol] == 'b') && (board[currRow - 1][currCol + 1] == 'b') &&
+                (board[currRow - 2][currCol + 2] == 'b') && (board[currRow - 3][currCol + 3] == 'b'))
+            {
+
+                return 'b';
+            }
+            else if ((board[currRow][currCol] == 'r') && (board[currRow - 1][currCol + 1] == 'r') &&
+                     (board[currRow - 2][currCol + 2] == 'r') && (board[currRow - 3][currCol + 3] == 'r'))
+            {
+
+                return 'r';
+            }
+
+            currRow--;
+            currCol++;
+        }
+        return '-';
+    }
+
+    char forwardSlashDiagonalCheckerMaxRow(int currRow, int currCol)
+    {
+        while ((currCol + 3) <= (COLS - 1))
+        {
+
+            if ((board[currRow][currCol] == 'b') && (board[currRow - 1][currCol + 1] == 'b') &&
+                (board[currRow - 2][currCol + 2] == 'b') && (board[currRow - 3][currCol + 3] == 'b'))
+            {
+
+                return 'b';
+            }
+            else if ((board[currRow][currCol] == 'r') && (board[currRow - 1][currCol + 1] == 'r') &&
+                     (board[currRow - 2][currCol + 2] == 'r') && (board[currRow - 3][currCol + 3] == 'r'))
+            {
+
+                return 'r';
+            }
+
+            currRow--;
             currCol++;
         }
         return '-';

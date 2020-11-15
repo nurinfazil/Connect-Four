@@ -38,6 +38,7 @@ public:
 
         for (int i = 0; i < ROWS; i++)
         {
+            cout << " | ";
             for (int j = 0; j < COLS; j++)
             {
                 cout << board[i][j] << " | ";
@@ -99,7 +100,135 @@ public:
             }
         }
 
+        // check back-slash (\) diagonals
+
+        // From [2][0]
+        char check1 = backSlashDiagonalCheckerMaxRow(2, 0);
+        if (check1 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check1 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [1][0]
+        char check2 = backSlashDiagonalCheckerMaxRow(1, 0);
+        if (check2 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check2 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [0][0]
+        char check3 = backSlashDiagonalCheckerMaxRow(0, 0);
+        if (check3 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check3 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [0][1]
+        char check4 = backSlashDiagonalCheckerMaxCol(0, 1);
+        if (check4 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check4 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [0][2]
+        char check5 = backSlashDiagonalCheckerMaxCol(0, 2);
+        if (check5 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check5 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
+        // From [0][3]
+        char check6 = backSlashDiagonalCheckerMaxCol(0, 3);
+        if (check6 == 'b')
+        {
+            winner = 'b';
+            return false;
+        }
+        else if (check6 == 'r')
+        {
+            winner = 'r';
+            return false;
+        }
+
         return true;
+    }
+
+    char backSlashDiagonalCheckerMaxRow(int currRow, int currCol)
+    {
+        while ((currRow + 3) <= (ROWS - 1))
+        {
+
+            if ((board[currRow][currCol] == 'b') && (board[currRow + 1][currCol + 1] == 'b') &&
+                (board[currRow + 2][currCol + 2] == 'b') && (board[currRow + 3][currCol + 3] == 'b'))
+            {
+
+                return 'b';
+            }
+            else if ((board[currRow][currCol] == 'r') && (board[currRow + 1][currCol + 1] == 'r') &&
+                     (board[currRow + 2][currCol + 2] == 'r') && (board[currRow + 3][currCol + 3] == 'r'))
+            {
+
+                return 'r';
+            }
+
+            currRow++;
+            currCol++;
+        }
+        return '-';
+    }
+
+    char backSlashDiagonalCheckerMaxCol(int currRow, int currCol)
+    {
+        while ((currCol + 3) <= (COLS - 1))
+        {
+
+            if ((board[currRow][currCol] == 'b') && (board[currRow + 1][currCol + 1] == 'b') &&
+                (board[currRow + 2][currCol + 2] == 'b') && (board[currRow + 3][currCol + 3] == 'b'))
+            {
+
+                return 'b';
+            }
+            else if ((board[currRow][currCol] == 'r') && (board[currRow + 1][currCol + 1] == 'r') &&
+                     (board[currRow + 2][currCol + 2] == 'r') && (board[currRow + 3][currCol + 3] == 'r'))
+            {
+
+                return 'r';
+            }
+
+            currRow++;
+            currCol++;
+        }
+        return '-';
     }
 
     void pickColumn(char player, int column)
@@ -137,7 +266,7 @@ int main()
 {
     Game game;
     //game.printBoard();
-    cout << "Beginning the game!\n";
+    cout << "Beginning the game!\n\n";
 
     char P1 = 'b';
     char P2 = 'r';

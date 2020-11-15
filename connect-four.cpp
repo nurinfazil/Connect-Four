@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -41,6 +42,14 @@ public:
     // Prints the Connect-4 Board.
     void printBoard()
     {
+        cout << "\n";
+
+        for (int i = 0; i < 7; i++)
+        {
+            cout << "   " << i;
+        }
+
+        cout << "\n";
 
         for (int i = 0; i < ROWS; i++)
         {
@@ -286,7 +295,7 @@ public:
             P2NumTurns--;
         }
 
-        if (column > 7 || column < 0)
+        if (column > 6 || column < 0)
         {
             cout << "Invalid move. Pick a column between 0 and 6 next time.\n";
             return;
@@ -333,6 +342,14 @@ int main()
             cout << "Player 1's move: ";
             int move;
             cin >> move;
+            while (!cin.good())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid input. Try again\n";
+                cout << "Player 1's move: ";
+                cin >> move;
+            }
             game.pickColumn(activePlayer, move);
             activePlayer = P2;
         }
@@ -341,6 +358,14 @@ int main()
             cout << "Player 2's move: ";
             int move;
             cin >> move;
+            while (!cin.good())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid input. Try again\n";
+                cout << "Player 2's move: ";
+                cin >> move;
+            }
             game.pickColumn(activePlayer, move);
             activePlayer = P1;
         }

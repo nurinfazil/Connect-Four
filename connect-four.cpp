@@ -15,8 +15,8 @@ public:
     // Two-dimensional vector for the board
     vector<vector<char>> board;
     char winner;
-    int P1NumTurns = TURNS;
-    int P2NumTurns = TURNS;
+    int P1NumTurns = 0;
+    int P2NumTurns = 0;
 
     // Constructor
     Game()
@@ -34,6 +34,8 @@ public:
         }
 
         winner = '-';
+        P1NumTurns = TURNS;
+        P2NumTurns = TURNS;
     }
 
     // Prints the Connect-4 Board.
@@ -58,14 +60,8 @@ public:
     // Checks for Connect Four and also checks if there is a tie
     bool isPlaying()
     {
-
-        if ((P1NumTurns <= 0) && (P2NumTurns <= 0))
-        {
-            winner = '=';
-            return false;
-        }
-
         // check horizontals for win
+
         for (int i = ROWS - 1; i >= 0; i--)
         {
             for (int j = 0; j < (COLS - 3); j++)
@@ -84,6 +80,7 @@ public:
         }
 
         // check verticals for win
+
         for (int i = 0; i < COLS; i++)
         {
             for (int j = 0; j < (ROWS - 3); j++)
@@ -103,161 +100,73 @@ public:
 
         // check back-slash (\) diagonals for win
 
-        // Diagonally from [2][0]
-        char check1 = backSlashDiagonalCheckerMaxRow(2, 0);
-        if (check1 == 'b')
+        for (int i = 2; i >= 0; i--)
         {
-            winner = 'b';
-            return false;
-        }
-        else if (check1 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [1][0]
-        char check2 = backSlashDiagonalCheckerMaxRow(1, 0);
-        if (check2 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check2 == 'r')
-        {
-            winner = 'r';
-            return false;
+            char check1 = backSlashDiagonalCheckerMaxRow(i, 0);
+            if (check1 == 'b')
+            {
+                winner = 'b';
+                return false;
+            }
+            else if (check1 == 'r')
+            {
+                winner = 'r';
+                return false;
+            }
         }
 
-        // Diagonally from [0][0]
-        char check3 = backSlashDiagonalCheckerMaxRow(0, 0);
-        if (check3 == 'b')
+        for (int i = 1; i <= 3; i++)
         {
-            winner = 'b';
-            return false;
-        }
-        else if (check3 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [0][1]
-        char check4 = backSlashDiagonalCheckerMaxCol(0, 1);
-        if (check4 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check4 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [0][2]
-        char check5 = backSlashDiagonalCheckerMaxCol(0, 2);
-        if (check5 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check5 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [0][3]
-        char check6 = backSlashDiagonalCheckerMaxCol(0, 3);
-        if (check6 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check6 == 'r')
-        {
-            winner = 'r';
-            return false;
+            char check2 = backSlashDiagonalCheckerMaxCol(0, i);
+            if (check2 == 'b')
+            {
+                winner = 'b';
+                return false;
+            }
+            else if (check2 == 'r')
+            {
+                winner = 'r';
+                return false;
+            }
         }
 
         // check forward-slash (/) diagonals
 
-        // Diagonally from [3][0]
-        char check7 = forwardSlashDiagonalCheckerMinRow(3, 0);
-        if (check7 == 'b')
+        for (int i = 3; i <= 5; i++)
         {
-            winner = 'b';
-            return false;
-        }
-        else if (check7 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [4][0]
-        char check8 = forwardSlashDiagonalCheckerMinRow(4, 0);
-        if (check8 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check8 == 'r')
-        {
-            winner = 'r';
-            return false;
+            char check3 = forwardSlashDiagonalCheckerMinRow(i, 0);
+            if (check3 == 'b')
+            {
+                winner = 'b';
+                return false;
+            }
+            else if (check3 == 'r')
+            {
+                winner = 'r';
+                return false;
+            }
         }
 
-        // Diagonally from [5][0]
-        char check9 = forwardSlashDiagonalCheckerMinRow(5, 0);
-        if (check9 == 'b')
+        for (int i = 1; i <= 3; i++)
         {
-            winner = 'b';
-            return false;
-        }
-        else if (check9 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
-
-        // Diagonally from [5][1]
-        char check10 = forwardSlashDiagonalCheckerMaxRow(5, 1);
-        if (check10 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check10 == 'r')
-        {
-            winner = 'r';
-            return false;
+            char check4 = forwardSlashDiagonalCheckerMaxRow(5, i);
+            if (check4 == 'b')
+            {
+                winner = 'b';
+                return false;
+            }
+            else if (check4 == 'r')
+            {
+                winner = 'r';
+                return false;
+            }
         }
 
-        // Diagonally from [5][2]
-        char check11 = forwardSlashDiagonalCheckerMaxRow(5, 2);
-        if (check11 == 'b')
-        {
-            winner = 'b';
-            return false;
-        }
-        else if (check11 == 'r')
-        {
-            winner = 'r';
-            return false;
-        }
+        // Declare a tie if both players are out of turns
 
-        // Diagonally from [5][3]
-        char check12 = forwardSlashDiagonalCheckerMaxRow(5, 3);
-        if (check12 == 'b')
+        if ((P1NumTurns <= 0) && (P2NumTurns <= 0))
         {
-            winner = 'b';
-            return false;
-        }
-        else if (check12 == 'r')
-        {
-            winner = 'r';
+            winner = '=';
             return false;
         }
 
@@ -364,7 +273,7 @@ public:
         return '-';
     }
 
-    // Puts a player's piece into the specified column
+    // Puts a player's piece into the specified column. If the column is full, returns a message saying it is full.
     void pickColumn(char player, int column)
     {
         if (player == 'b')

@@ -6,12 +6,14 @@ using namespace std;
 
 #define ROWS 6
 #define COLS 7
+#define TURNS 21
 
 class Game
 {
 public:
     // Two-dimensional vector for the board
     vector<vector<char>> board;
+    char winner; 
 
     // Constructor
     Game()
@@ -27,18 +29,12 @@ public:
 
             board.push_back(v);
         }
+        
+        winner = '-';
     }
 
     void printBoard()
     {
-        // for (int i = 0; i < ROWS; i++)
-        // {
-        //     for (int j = 0; j < COLS; j++)
-        //     {
-        //         cout << "board"
-        //              << "[" << i << "][" << j << "]: " << board[i][j] << "\n";
-        //     }
-        // }
 
         for (int i = 0; i < ROWS; i++)
         {
@@ -56,6 +52,30 @@ public:
 
     bool isPlaying()
     {
+        // check horizontals
+        for (int i = ROWS - 1; i >= 0; i--) {
+            
+            if (((board[i][0] == 'b') && (board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b')) || 
+                ((board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b')) || 
+                ((board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b')) || 
+                ((board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b') && (board[i][6] == 'b'))) {
+                    
+                winner = 'b';
+                return false; 
+            } 
+            
+            else if (((board[i][0] == 'r') && (board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r')) || 
+                     ((board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r')) || 
+                     ((board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r')) || 
+                     ((board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r') && (board[i][6] == 'r'))){
+                
+                winner = 'r';
+                return false; 
+                
+            }
+            
+        }
+        
         return true;
     }
 
@@ -123,4 +143,6 @@ int main()
             activePlayer = P1;
         }
     }
+    cout << "Game over. Winner: "<< game.winner << "\n"; 
+
 }

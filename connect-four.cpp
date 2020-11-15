@@ -68,47 +68,36 @@ public:
         // check horizontals for win
         for (int i = ROWS - 1; i >= 0; i--)
         {
-
-            if (((board[i][0] == 'b') && (board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b')) ||
-                ((board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b')) ||
-                ((board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b')) ||
-                ((board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b') && (board[i][6] == 'b')))
+            for (int j = 0; j < (COLS - 3); j++)
             {
-
-                winner = 'b';
-                return false;
-            }
-
-            else if (((board[i][0] == 'r') && (board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r')) ||
-                     ((board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r')) ||
-                     ((board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r')) ||
-                     ((board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r') && (board[i][6] == 'r')))
-            {
-
-                winner = 'r';
-                return false;
+                if ((board[i][j] == 'b') && (board[i][j + 1] == 'b') && (board[i][j + 2] == 'b') && (board[i][j + 3] == 'b'))
+                {
+                    winner = 'b';
+                    return false;
+                }
+                else if ((board[i][j] == 'r') && (board[i][j + 1] == 'r') && (board[i][j + 2] == 'r') && (board[i][j + 3] == 'r'))
+                {
+                    winner = 'r';
+                    return false;
+                }
             }
         }
 
         // check verticals for win
         for (int i = 0; i < COLS; i++)
         {
-            if (((board[0][i] == 'b') && (board[1][i] == 'b') && (board[2][i] == 'b') && (board[3][i] == 'b')) ||
-                ((board[1][i] == 'b') && (board[2][i] == 'b') && (board[3][i] == 'b') && (board[4][i] == 'b')) ||
-                ((board[2][i] == 'b') && (board[3][i] == 'b') && (board[4][i] == 'b') && (board[5][i] == 'b')))
+            for (int j = 0; j < (ROWS - 3); j++)
             {
-
-                winner = 'b';
-                return false;
-            }
-
-            else if (((board[0][i] == 'r') && (board[1][i] == 'r') && (board[2][i] == 'r') && (board[3][i] == 'r')) ||
-                     ((board[1][i] == 'r') && (board[2][i] == 'r') && (board[3][i] == 'r') && (board[4][i] == 'r')) ||
-                     ((board[2][i] == 'r') && (board[3][i] == 'r') && (board[4][i] == 'r') && (board[5][i] == 'r')))
-            {
-
-                winner = 'r';
-                return false;
+                if ((board[j][i] == 'b') && (board[j + 1][i] == 'b') && (board[j + 2][i] == 'b') && (board[j + 3][i] == 'b'))
+                {
+                    winner = 'b';
+                    return false;
+                }
+                else if ((board[j][i] == 'r') && (board[j + 1][i] == 'r') && (board[j + 2][i] == 'r') && (board[j + 3][i] == 'r'))
+                {
+                    winner = 'r';
+                    return false;
+                }
             }
         }
 

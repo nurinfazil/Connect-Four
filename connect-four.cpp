@@ -13,7 +13,7 @@ class Game
 public:
     // Two-dimensional vector for the board
     vector<vector<char>> board;
-    char winner; 
+    char winner;
 
     // Constructor
     Game()
@@ -29,7 +29,7 @@ public:
 
             board.push_back(v);
         }
-        
+
         winner = '-';
     }
 
@@ -53,29 +53,52 @@ public:
     bool isPlaying()
     {
         // check horizontals
-        for (int i = ROWS - 1; i >= 0; i--) {
-            
-            if (((board[i][0] == 'b') && (board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b')) || 
-                ((board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b')) || 
-                ((board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b')) || 
-                ((board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b') && (board[i][6] == 'b'))) {
-                    
+        for (int i = ROWS - 1; i >= 0; i--)
+        {
+
+            if (((board[i][0] == 'b') && (board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b')) ||
+                ((board[i][1] == 'b') && (board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b')) ||
+                ((board[i][2] == 'b') && (board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b')) ||
+                ((board[i][3] == 'b') && (board[i][4] == 'b') && (board[i][5] == 'b') && (board[i][6] == 'b')))
+            {
+
                 winner = 'b';
-                return false; 
-            } 
-            
-            else if (((board[i][0] == 'r') && (board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r')) || 
-                     ((board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r')) || 
-                     ((board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r')) || 
-                     ((board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r') && (board[i][6] == 'r'))){
-                
-                winner = 'r';
-                return false; 
-                
+                return false;
             }
-            
+
+            else if (((board[i][0] == 'r') && (board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r')) ||
+                     ((board[i][1] == 'r') && (board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r')) ||
+                     ((board[i][2] == 'r') && (board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r')) ||
+                     ((board[i][3] == 'r') && (board[i][4] == 'r') && (board[i][5] == 'r') && (board[i][6] == 'r')))
+            {
+
+                winner = 'r';
+                return false;
+            }
         }
-        
+
+        // check verticals
+        for (int i = 0; i < COLS; i++)
+        {
+            if (((board[0][i] == 'b') && (board[1][i] == 'b') && (board[2][i] == 'b') && (board[3][i] == 'b')) ||
+                ((board[1][i] == 'b') && (board[2][i] == 'b') && (board[3][i] == 'b') && (board[4][i] == 'b')) ||
+                ((board[2][i] == 'b') && (board[3][i] == 'b') && (board[4][i] == 'b') && (board[5][i] == 'b')))
+            {
+
+                winner = 'b';
+                return false;
+            }
+
+            else if (((board[0][i] == 'r') && (board[1][i] == 'r') && (board[2][i] == 'r') && (board[3][i] == 'r')) ||
+                     ((board[1][i] == 'r') && (board[2][i] == 'r') && (board[3][i] == 'r') && (board[4][i] == 'r')) ||
+                     ((board[2][i] == 'r') && (board[3][i] == 'r') && (board[4][i] == 'r') && (board[5][i] == 'r')))
+            {
+
+                winner = 'r';
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -143,6 +166,5 @@ int main()
             activePlayer = P1;
         }
     }
-    cout << "Game over. Winner: "<< game.winner << "\n"; 
-
+    cout << "Game over. Winner: " << game.winner << "\n";
 }
